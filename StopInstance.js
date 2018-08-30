@@ -1,6 +1,6 @@
 'use strict';
 
-const aliyunSDK = require('aliyun-sdk');
+const ALY = require('aliyun-sdk');
 
 exports.handler = (event, context, callback) => {
     const eventData = JSON.parse(event);
@@ -9,7 +9,7 @@ exports.handler = (event, context, callback) => {
     const { accessKeyId, accessKeySecret } = credentials;
     const ecsArgs = { InstanceId: instanceId };
 
-    const ecs = new aliyunSDK.ECS({
+    const ecs = new ALY.ECS({
         accessKeyId,
         secretAccessKey: accessKeySecret,
         endpoint: 'https://ecs.aliyuncs.com',
