@@ -1,28 +1,21 @@
-'use strict';
+const ALY = require('aliyun-sdk')
+const pjson = require('aliyun-sdk/package.json')
 
-const ALY = require('aliyun-sdk');
-
-exports.handler = (event, context, callback) => {
-    const eventData = JSON.parse(event);
-    const { instanceId } = eventData;
-    const { credentials  } = context;
-    const { accessKeyId, accessKeySecret } = credentials;
-    const ecsArgs = { InstanceId: instanceId };
+const handler = (event, context, callback) => {
+    const { credentials, region } = context
+    const { accessKeyId, accessKeySecret, securityToken } = credentials
+    const ecsArgs = JSON.parse(event)
 
     const ecs = new ALY.ECS({
         accessKeyId,
         secretAccessKey: accessKeySecret,
         endpoint: 'https://ecs.aliyuncs.com',
-        apiVersion: '2014-05-26'
-    });
+        apiVersion: '2014-05-26',
+        region,
+        securityToken,
+    })
 
-    const onStopHandler = (err, res) => {
-        if (err) {
-            callback(err);
-        }
+    ecs.stopInstance(ecsArgs, callback)
+}
 
-        callback(null, 'all good');
-    };
-
-    ecs.stopInstance(ecsArgs, onStopHandler);
-};
+module.exports = { handler }
