@@ -1,5 +1,4 @@
 const ALY = require('aliyun-sdk')
-const pjson = require('aliyun-sdk/package.json')
 
 const handler = (event, context, callback) => {
     const { credentials, region } = context
