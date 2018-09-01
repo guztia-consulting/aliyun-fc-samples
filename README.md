@@ -6,3 +6,5 @@ This project exists to keep in an ordered place all the _Node.js_ samples I buil
 For *ECS* instances you would need an event in JSON like `{"InstanceId":"_instance-id-here_"}`.
 - `StopInstance.js`
 - `StartInstance.js`
+
+_... more to come_
